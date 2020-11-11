@@ -4,6 +4,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+html {
+  font-size: 62.5%;
+}
 body {
   font-family: "Montserrat", sans-serif;
 }
@@ -16,6 +19,41 @@ header.main-header {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  padding-top: 16rem;
+  .header-details {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    .details1,
+    .details2 {
+      width: 50%;
+      color: #fff;
+      text-align: center;
+    }
+    .details1 {
+      img {
+        width: 80%;
+        height: 40rem;
+      }
+    }
+    .details2 {
+      h1 {
+        font-size: 3rem;
+        text-transform: capitalize;
+        margin-bottom: 1rem;
+      }
+      img {
+        height: 5rem;
+        cursor: pointer;
+        margin-bottom: 1rem;
+      }
+      p {
+        font-size: 1.2rem;
+        font-weight: 600;
+        font-style: italic;
+      }
+    }
+  }
   .nav {
     position: fixed;
     top: 0;
@@ -55,6 +93,49 @@ header.main-header {
               color: rgba(255, 255, 255, 0.7);
             }
           }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  header.main-header {
+    background-position: right;
+    height: 130vh;
+    .header-details {
+      display: block;
+      .details1,
+      .details2 {
+        width: 100%;
+        padding: 0 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  header.main-header {
+    padding-top: 7rem;
+    height: 100vh;
+    .nav {
+      nav.main-nav {
+        .logo {
+          font-size: 1.4rem;
+        }
+        ul.nav-links {
+          li {
+            a {
+              font-size: 1.2rem;
+            }
+          }
+        }
+      }
+    }
+    .header-details {
+      .details2 {
+        h1 {
+          font-size: 2.3rem;
         }
       }
     }
