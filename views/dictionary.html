@@ -4,8 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dictionary | Search</title>
+    <link rel="stylesheet" href="css/dictionary.css" />
   </head>
   <body>
-    Hello there welcome to the dictionary
+    <div class="container">
+      <h1 class="title-text">Foxram Dictionary</h1>
+      <div class="input-container">
+        <input type="text" class="query-field" placeholder="Enter the word" />
+        <button class="submit-query-btn">Search</button>
+      </div>
+      <div class="result"></div>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/dictionary.js"></script>
   </body>
 </html>
