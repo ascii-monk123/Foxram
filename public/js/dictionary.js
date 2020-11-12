@@ -78,7 +78,7 @@ const fetchData = async (e) => {
     } catch (err) {
       console.log(err);
       removeSpinner();
-      DomEle.result.innerHTML = `<p>Sorry results were not found</p>`;
+      DomEle.result.innerHTML = `<p style="text-align:center; font-size:18px; margin-top:20px;">Sorry results were not found !!!!</p>`;
     }
   } else {
     alert("Invalid Details");
