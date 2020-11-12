@@ -3,8 +3,30 @@ const key = "1d8c04fb-5582-40d0-82ee-d13d71556aa7";
 const DomEle = {
   inputField: document.querySelector(".query-field"),
   submitBtn: document.querySelector(".submit-query-btn"),
+  result: document.querySelector(".result"),
 };
 let words = [];
+let template = ``;
+const makeTemplate = (data, type) => {
+  template = "";
+  data.forEach((word) => {
+    template += ` <div class="card">
+          <div class="card-content">
+          <p>
+          <b>${word.name}</b>
+          <ul>`;
+    word.definitions.forEach((def, index) => {
+      template += `<li><b>${index + 1}></b> ${def}</li>`;
+    });
+    template += `</ul><br/>
+        <b>Type: ${word.type}</b>
+        </p>
+        </div>
+        </div>
+        `;
+  });
+  return template;
+};
 const handleData = (data) => {
   words = data.map((word) => {
     return {
@@ -13,8 +35,10 @@ const handleData = (data) => {
       type: word.fl,
     };
   });
-  console.log(words);
+  return words;
 };
+
+const showSpinner = () => {};
 
 const fetchData = async (e) => {
   e.preventDefault();
@@ -30,7 +54,10 @@ const fetchData = async (e) => {
       const res = await axios.get(
         `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${query}?key=${key}`
       );
-      handleData(res.data);
+      const filterData = handleData(res.data);
+      const temp = makeTemplate(filterData);
+      DomEle.result.innerHTML = "";
+      DomEle.result.insertAdjacentHTML("afterbegin", temp);
     } catch (err) {
       console.log(err);
     }
