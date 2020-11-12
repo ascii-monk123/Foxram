@@ -7,6 +7,14 @@ const DomEle = {
 };
 let words = [];
 let template = ``;
+const spinTemplate = `  <div class="sk-chase">
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+          <div class="sk-chase-dot"></div>
+        </div>`;
 const makeTemplate = (data, type) => {
   template = "";
   data.forEach((word) => {
@@ -38,7 +46,14 @@ const handleData = (data) => {
   return words;
 };
 
-const showSpinner = () => {};
+const showSpinner = () => {
+  DomEle.result.innerHTML = "";
+  DomEle.result.insertAdjacentHTML("afterbegin", spinTemplate);
+};
+
+const removeSpinner = () => {
+  DomEle.result.innerHTML = "";
+};
 
 const fetchData = async (e) => {
   e.preventDefault();
@@ -51,15 +66,19 @@ const fetchData = async (e) => {
     !/[^a-zA-Z]/.test(query)
   ) {
     try {
+      showSpinner();
       const res = await axios.get(
         `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${query}?key=${key}`
       );
+      removeSpinner();
       const filterData = handleData(res.data);
       const temp = makeTemplate(filterData);
       DomEle.result.innerHTML = "";
       DomEle.result.insertAdjacentHTML("afterbegin", temp);
     } catch (err) {
       console.log(err);
+      removeSpinner();
+      DomEle.result.innerHTML = `<p>Sorry results were not found</p>`;
     }
   } else {
     alert("Invalid Details");
